@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,5 +17,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware(['auth', 'role:admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::view('/sports', 'admin.coming-soon', ['title' => 'Sports'])->name('sports.index');
+        Route::view('/users', 'admin.coming-soon', ['title' => 'Users'])->name('users.index');
+        Route::view('/reports', 'admin.coming-soon', ['title' => 'Reports'])->name('reports.index');
+        Route::view('/support', 'admin.coming-soon', ['title' => 'Support'])->name('support.index');
+        Route::view('/settings', 'admin.coming-soon', ['title' => 'Settings'])->name('settings.edit');
+    });
 
 require __DIR__.'/auth.php';
