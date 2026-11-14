@@ -23,6 +23,10 @@ class User extends Authenticatable
         'password',
         'role',
         'status',
+        'phone',
+        'city',
+        'bio',
+        'email_notifications',
     ];
 
     /**
@@ -45,10 +49,31 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'email_notifications' => 'boolean',
         ];
     }
 
     public function isAdmin(): bool{
         return $this->role === 'admin';
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === 'active';
+    }
+
+    public function isSuspended(): bool
+    {
+        return $this->status === 'suspended';
+    }
+
+    public function deactivate(): void
+    {
+        $this->update(['status' => 'deactivated']);
+    }
+
+    public function reactivate(): void
+    {
+        $this->update(['status' => 'active']);
     }
 }

@@ -25,15 +25,29 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
         $request->session()->regenerate();
 
-        if ($request->user()->isAdmin()) {
+        $user = $request->user();
+
+        if ($user->isSuspended()) {
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return back()->withErrors(['email' => 'This account has been suspended. Please contact support.']);
+        }
+
+        if (! $user->isActive()) {
+            $user->reactivate();
+            session()->flash('welcome_back', 'Welcome back! Your account has been reactivated.');
+        }
+
+        if ($user->isAdmin()) {
             return redirect()->intended(route('admin.dashboard', absolute: false));
         }
 
         return redirect()->intended(route('dashboard', absolute: false));
-    }
+    }   
 
     /**
      * Destroy an authenticated session.
