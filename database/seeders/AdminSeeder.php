@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
             ['email' => 'admin@sportsswap.test'],
             [
                 'name' => 'Admin',
-                'password' => Hash::make('password123'),
+                'password' => Hash::make(env('ADMIN_PASSWORD', 'password123')),
                 'role' => 'admin',
                 'status' => 'active',
             ]
