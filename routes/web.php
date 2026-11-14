@@ -30,4 +30,12 @@ Route::middleware(['auth', 'role:admin'])
         Route::view('/settings', 'admin.coming-soon', ['title' => 'Settings'])->name('settings.edit');
     });
 
+Route::view('/about', 'about')->name('about');
+
+Route::middleware('auth')->group(function () {
+    Route::view('/skills', 'coming-soon', ['title' => 'My Skills'])->name('skills.index');
+    Route::view('/matches', 'coming-soon', ['title' => 'Matches'])->name('matches.index');
+    Route::view('/swaps', 'coming-soon', ['title' => 'Swaps'])->name('swaps.index');
+});
+
 require __DIR__.'/auth.php';
