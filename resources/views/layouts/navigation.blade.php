@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('swaps.index')" :active="request()->routeIs('swaps.*')">
                         Swaps
                     </x-nav-link>
+                    <x-nav-link :href="route('sports.index')" :active="request()->routeIs('sports.*')">
+                        Sports
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -13,6 +13,7 @@
         <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
             <a href="{{ url('/') }}" class="text-xl font-bold text-indigo-600">Sports Swap</a>
             <nav class="flex items-center gap-6 text-sm">
+                <a href="{{ route('sports.index') }}" class="hover:text-indigo-600">Sports</a>
                 <a href="{{ route('about') }}" class="hover:text-indigo-600">About</a>
                 @auth
                     @if (Auth::user()->isAdmin())

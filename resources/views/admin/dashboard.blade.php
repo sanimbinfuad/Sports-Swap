@@ -6,7 +6,7 @@
         </div>
         <div class="bg-white rounded shadow p-6">
             <p class="text-sm text-gray-500">Sports in catalogue</p>
-            <p class="text-3xl font-semibold text-gray-800">-</p>
+            <p class="text-3xl font-semibold text-gray-800">{{ $sportCount }}</p>
         </div>
         <div class="bg-white rounded shadow p-6">
             <p class="text-sm text-gray-500">Completed swaps</p>

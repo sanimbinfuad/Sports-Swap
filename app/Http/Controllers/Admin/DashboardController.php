@@ -1,8 +1,13 @@
 <?php
 
+
+
+
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sport;
 use App\Models\User;
 
 class DashboardController extends Controller
@@ -11,6 +16,7 @@ class DashboardController extends Controller
     {
         return view('admin.dashboard', [
             'userCount' => User::count(),
+            'sportCount' => Sport::active()->count(),
         ]);
     }
 }
